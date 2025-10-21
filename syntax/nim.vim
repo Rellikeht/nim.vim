@@ -65,28 +65,21 @@ syn region  nimComment       start="#\[" end="\]#" contains=nimTodo,@Spell
 syn keyword nimTodo          TODO FIXME XXX contained
 syn keyword nimBoolean       true false
 
-syn keyword nimException       except finally raise try
-syn keyword nimConstant        nil
-syn keyword nimOperator        addr and as distinct div do in is isnot mod
-syn keyword nimOperator        not notin of or ptr ref shl shr xor
-syn keyword nimStatement       asm bind break cast concept const re
-syn keyword nimStatement       continue defer discard enum let mixin return
-syn keyword nimStatement       static type using var yield
-syn keyword nimStatement       converter func iterator macro method proc template nextgroup=nimFunction skipwhite
-syn keyword nimStatement       alignof compiles defined sizeof
-syn keyword nimConditional     case elif else if
-syn keyword nimException       except finally raise try block
-syn keyword nimRepeat          for while
-syn keyword nimPreCondit       when static
-syn keyword nimInclude         export from import include
-"syn match nimConstant         '[{}\[\]()]'
-"syn match SpecialComment      '[,`\:]\|\.\{2,}<\?'
-"syn match nimRepeat           '\.\k\+'
-"syn match nimPreCondit        '{\.\|\.}'
-"syn region  nimPreCondit       start='{\.' end='\.}' contains=@Spell
-"syn keyword nimStructure       enum object tuple
-
-
+syn keyword nimException     except finally raise try
+syn keyword nimConstant      nil
+syn keyword nimOperator      addr and as distinct div do in is isnot mod
+syn keyword nimOperator      not notin of or ptr ref shl shr xor
+syn keyword nimStatement     asm bind break cast concept const re
+syn keyword nimStatement     continue defer discard enum let mixin return
+syn keyword nimStatement     static type using var yield
+syn keyword nimStatement     converter func iterator macro method proc template nextgroup=nimFunction skipwhite
+syn keyword nimStatement     alignof compiles defined sizeof
+syn keyword nimConditional   case elif else if
+syn keyword nimException     except finally raise try block
+syn keyword nimRepeat        for while
+syn keyword nimPreCondit     when static
+syn keyword nimInclude       export from import include
+syn keyword nimThis          this result
 
 " Strings
 syn region nimString start=+'+ skip=+\\\\\|\\'\|\\$+ excludenl end=+'+ end=+$+ keepend contains=nimEscape,nimEscapeError,@Spell
@@ -203,7 +196,8 @@ if v:version >= 508 || !exists('did_nim_syn_inits')
   HiLink nimComment		  Comment
   HiLink nimTodo		  Todo
   HiLink nimDecorator	  Define
-  HiLink nimSpecialVar	  Identifier
+  "HiLink nimSpecialVar	  Identifier
+  HiLink nimSpecialVar	  Label
 
   HiLink nimStatement	  Statement
   HiLink nimConstant      Constant
@@ -234,7 +228,7 @@ if v:version >= 508 || !exists('did_nim_syn_inits')
 endif
 syn keyword PreProc or and not
 syn match PreProc        '[@]'
-syn match ocenSymbol     '[,;]'
+syn match nimSymbol      '[,;]'
 syn match Operator       '[\+\-\%=\/\^\&\*!?><\$|~]'
 syn match SpecialComment '[`:\.]'
 syn match Constant       '[{}\[\]()]'
@@ -242,13 +236,12 @@ hi def nimSymbol ctermfg=DarkGray guifg=DarkGray
 " ---
 "hi def link nimBuiltin Statement
 hi def link nimFunc Function
-hi def link nimTypedef Identifier
-hi def nimType ctermfg=DarkCyan guifg=DarkCyan
-hi def nimThis ctermfg=DarkMagenta guifg=DarkMagenta
+hi def link nimTypedef Changed
+hi def link nimType MoreMsg
+hi def link nimThis Label
 "syn match nimAttribute '\(^\s*\[\s*\)\@<=\w\w*\ze\s*.*\]'
 syn match Repeat   "\([^\.]\.\)\@<=\w\w*\(\(\[.*\]\)*\s*(\)\@!"
 syn match nimFloat "\([0-9]\+\.\)\@<=[0-9][0-9]*\(f32\|f64\)*"
-syn match nimThis '\(\w\)\@<!this\(\w\)\@!'
 "syn match nimType '\(\sas\s\+\W*\)\@<=\w\+'
 "syn match nimType '\(\(\W\|^\)\(let\|const\|def\)\s\+[^=]*\w\s*)*\s*:\s*\W*\|^\W*\w\w*\s*:\w*\)\@<=\w\+'
 "syn match nimTypedef  contains=nimTypedef "\%([^[:cntrl:][:space:][:punct:][:digit:]]\|_\)\%([^[:cntrl:][:punct:][:space:]]\|_\)*" display contained
