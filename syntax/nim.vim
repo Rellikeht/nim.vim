@@ -85,7 +85,6 @@ syn keyword nimThis          this result
 syn region nimString start=+'+ skip=+\\\\\|\\'\|\\$+ excludenl end=+'+ end=+$+ keepend contains=nimEscape,nimEscapeError,@Spell
 syn region nimString start=+"+ skip=+\\\\\|\\"\|\\$+ excludenl end=+"+ end=+$+ keepend contains=nimEscape,nimEscapeError,@Spell
 syn region nimString start=+"""+ end=+"""+ keepend contains=nimEscape,nimEscapeError,@Spell
-"syn region nimRawString matchgroup=Normal start=+[rR]"+ end=+"+ skip=+\\\\\|\\"+ contains=@Spell
 syn region nimRawString start=+[rR]"+ end=+"+ skip=+\\\\\|\\"+ contains=@Spell
 
 syn match  nimEscape		+\\[abfnrtv'"\\]+ contained
@@ -196,7 +195,6 @@ if v:version >= 508 || !exists('did_nim_syn_inits')
   HiLink nimComment		  Comment
   HiLink nimTodo		  Todo
   HiLink nimDecorator	  Define
-  "HiLink nimSpecialVar	  Identifier
   HiLink nimSpecialVar	  Label
 
   HiLink nimStatement	  Statement
@@ -255,4 +253,3 @@ syn match nimType    "\w\(\w\)*\ze\(<.*>\s*\)*::[^<]"
 
 
 let b:current_syntax = 'nim'
-
